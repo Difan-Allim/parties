@@ -9,9 +9,9 @@ class Member extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['surname','name','patronym','birth_date','social_id'];
     
-    public function department()
+    public function departments()
     {
         return $this->belongsToMany(Department::class);
     }

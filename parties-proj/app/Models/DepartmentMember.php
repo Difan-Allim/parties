@@ -9,5 +9,5 @@ class DepartmentMember extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['department_id', 'member_id', 'join_date'];
+    protected $fillable = ['department_id', 'member_id'];
 }

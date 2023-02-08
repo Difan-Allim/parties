@@ -9,11 +9,11 @@ class Department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['number','phone_number','address','city_id','organisation_id'];
     
-    public function member()
+    public function members()
     {
-        return $this->belongsToMany(Member::class)->withPivot('join_date');
+        return $this->belongsToMany(Member::class);
     }
     public function city()
     {

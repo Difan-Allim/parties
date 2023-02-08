@@ -9,7 +9,7 @@ class Organisation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title','holding_date','legal_id'];
 
     public function departments()
     {
