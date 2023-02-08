@@ -23,13 +23,13 @@ class PurposeController extends Controller
 
     public function create()
     {
-
+        $this->authorize('operate', Purpose::class);
         return view('entities.purpose.create');
     }
 
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', Purpose::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -37,19 +37,19 @@ class PurposeController extends Controller
 
         Purpose::create($validated);
 
-        return redirect('/purposes')->with('message', 'Тип собственности успешно добавлен');
+        return redirect('/purposes')->with('message', 'Направленность успешно добавлена');
     }
 
     public function edit(Purpose $purpose)
     {
-        
+        $this->authorize('operate', Purpose::class);
 
         return view('entities.purpose.edit', ['purpose' => $purpose]);
     }
 
     public function update(Request $request, Purpose $purpose)
     {
-        
+        $this->authorize('operate', Purpose::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -57,15 +57,15 @@ class PurposeController extends Controller
 
         $purpose->update($validated);
 
-        return redirect('/purposes')->with('message', 'Тип собственности успешно изменён');
+        return redirect('/purposes')->with('message', 'Направленность успешно изменена');
     }
 
     public function destroy(Purpose $purpose)
     {
-
+        $this->authorize('operate', Purpose::class);
 
         $purpose->delete();
 
-        return redirect('/purposes')->with('message', 'Тип собственности успешно удалён');
+        return redirect('/purposes')->with('message', 'Направленность успешно удалена');
     }
 }

@@ -15,11 +15,11 @@ class Organisation extends Model
     {
         return $this->hasMany(Department::class);
     }
-    public function discount()
+    public function discounts()
     {
         return $this->hasMany(Discount::class);
     }
-    public function document()
+    public function documents()
     {
         return $this->hasMany(Document::class);
     }

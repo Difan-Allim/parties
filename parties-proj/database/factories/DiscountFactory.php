@@ -22,8 +22,8 @@ class DiscountFactory extends Factory
             'money' => fake() -> randomFloat(2, 10, 100),
             'count_m' => fake() -> randomNumber(5, true),
             'type_id' => fake() -> numberBetween(1, 100),
-            'organisation_id' => fake() -> numberBetween(1, 1000),
-            'user_id' => fake() -> numberBetween(1, 10),
+            'organisation_id' => fake() -> numberBetween(1, 500),
+            'user_id' => 1,
         ];
     }
 }

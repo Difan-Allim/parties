@@ -1,6 +1,6 @@
 @props(['href'])
 
-<div class="py-4">
+<div class="py-4 flex space-x-4">
     <button>
         <a href="{{$href}}/edit" class="px-6 py-4 my-2 rounded-md flex space-x-2 transition duration-200 bg-slate-100 hover:drop-shadow-md">
             <span>

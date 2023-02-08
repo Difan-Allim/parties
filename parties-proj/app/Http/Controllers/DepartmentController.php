@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
-use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Member;
 use App\Models\Organisation;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
@@ -26,6 +26,8 @@ class DepartmentController extends Controller
 
     public function create()
     {
+        $this->authorize('operate', Department::class);
+
         return view('entities.department.create', [
             'organisations' => Organisation::all(),
             'cities' => City::all(),
@@ -35,6 +37,9 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('operate', Department::class);
+
+
         $validated = $request->validate([
             'number' => 'required',
             'phone_number' => 'required',
@@ -43,29 +48,29 @@ class DepartmentController extends Controller
             'organisation_id' => 'required|numeric'
         ]);
 
-        dd($validated);
-
         $department = Department::create($validated);
-        
+
         $members = explode(',', $request['member_id']);
         $department->members()->attach($members);
 
-        return redirect('/departments')->with('message', 'Предприятие успешно добавлено');
+        return redirect('/departments')->with('message', 'Штаб успешно добавлен');
     }
 
     public function edit(Department $department)
     {
-        
+        $this->authorize('operate', Department::class);
+
         return view('entities.department.edit', [
             'department' => $department,
+            'organisations' => Organisation::all(),
             'cities' => City::all(),
-            'organisations' => Organisation::all()
+            'members' => Member::all()
         ]);
     }
 
     public function update(Request $request, Department $department)
     {
-        
+        $this->authorize('operate', Department::class);
 
         $validated = $request->validate([
             'number' => 'required',
@@ -81,16 +86,15 @@ class DepartmentController extends Controller
         $department->members()->detach();
         $department->members()->attach($members);
 
-        return redirect('/departments')->with('message', 'Предприятие успешно изменено');
+        return redirect('/departments')->with('message', 'Штаб успешно изменён');
     }
 
     public function destroy(Department $department)
     {
-
-
+        $this->authorize('operate', Department::class);
 
         $department->delete();
 
-        return redirect('/departments')->with('message', 'Предприятие успешно удалено');
+        return redirect('/departments')->with('message', 'Штаб успешно удален');
     }
 }

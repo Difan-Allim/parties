@@ -1,36 +1,35 @@
 @extends('header')
 
 @section('content')
-    <form action="/discounts/{{$discount->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
+    <form action="/departments/{{$department->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
         @method('PUT')
-        <input type="text" name="user_id" value="2" class="hidden">
 
-        <h1 class="text-2xl font-bold text-center">Изменить акцию</h1>
+        <h1 class="text-2xl font-bold text-center">Изменить штаб</h1>
 
-        {{-- title --}}
-        <x-input-box colname="название" colname_form="title" input_value="{{ $discount->title }}" />
-        @error('title')
+        {{-- number --}}
+        <x-input-box colname="номер" colname_form="number" input_value="{{ $department->number }}" />
+        @error('number')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- company_id type_id --}}
-        <x-input-box-search colname="Тип акции" colname_form="type_id" input_value="{{ $discount->type->id }}">
-            @foreach ($types as $type)
+        {{-- city_id --}}
+        <x-input-box-search colname="Город" colname_form="city_id" input_value="{{ $department->city->id }}">
+            @foreach ($cities as $city)
                 <li class="ledger-search-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
-                    value="{{ $type->id }}">{{ $type->title }}</li>
+                    value="{{ $city->id }}">{{ $city->title }}</li>
             @endforeach
         </x-input-box-search>
-        @error('type_id')
+        @error('city_id')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- grade_id organisation_id --}}
-        <x-input-box-search colname="Название организации" colname_form="organisation_id" input_value="{{ $discount->organisation->id }}">
+        {{-- city_id --}}
+        <x-input-box-search colname="Название организации" colname_form="organisation_id" input_value="{{ $department->organisation->id }}">
             @foreach ($organisations as $organisation)
                 <li class="ledger-search-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
                     value="{{ $organisation->id }}">{{ $organisation->title }}</li>
@@ -42,25 +41,38 @@
             </p>
         @enderror
 
-        {{-- ingredients event_date--}}
-        <x-input-box colname="дата проведения" colname_form="event_date" input_value="{{ $discount->event_date }}" type="date"/>
-        @error('event_date')
+        {{-- phone_number--}}
+        <x-input-box colname="Номер телефона" colname_form="phone_number" input_value="{{ $department->phone_number }}"/>
+        @error('phone_number')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- weight money --}}
-        <x-input-box colname="цена" colname_form="money" input_value="{{ $discount->money }}" type="decimal"/>
-        @error('money')
+        {{-- address --}}
+        <x-input-box colname="Адрес" colname_form="address" input_value="{{ $department->address }}" />
+        @error('address')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- price count_m --}}
-        <x-input-box colname="численность" colname_form="count_m" input_value="{{ $discount->count_m }}" type="number"/>
-        @error('count_m')
+       {{-- member multiselect --}}
+       @php
+            $membersArr = [];
+            foreach ($department->members as $member) {
+                array_push($membersArr, $member->id);
+            }
+
+            $membersStr = implode(',', $membersArr);
+        @endphp
+       <x-input-box-multiple colname="владельцы" colname_form="member_id" input_value="{{ $membersStr }}">
+        @foreach ($members as $member)
+            <li class="ledger-multiple-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
+                value="{{ $member->id }}">{{ $member->surname }} {{ $member->name }} {{ $member->patronym }}</li>
+        @endforeach
+        </x-input-box-multiple>
+        @error('member_id')
             <p class="text-red-500">
                 {{ $message }}
             </p>

@@ -11,7 +11,40 @@
     </title>
 </head>
 <body>
-   
+    <x-flash-message />
+    <div class="flex justify-center">
+        @auth
+            <p class="m-2 p-2">Добро пожаловать, {{ auth()->user()->name }}</p>
+
+            <a href="/profile" class="m-2 p-2 rounded-md transition duration-200 hover:bg-slate-100">
+                <span class="font-bold">
+                    Профиль
+                </span>
+            </a>
+
+            <form action="/logout" method="POST">
+                @csrf
+
+                <button type="submit" class="m-2 p-2 rounded-md transition duration-200 hover:bg-slate-100">
+                    <span class="font-bold">
+                        Выйти
+                    </span>
+                </button>
+            </form>
+        @else
+            <a href="/login" class="m-2 p-2 rounded-md transition duration-200 hover:bg-slate-100">
+                <span class="font-bold">
+                    Войти
+                </span>
+            </a>
+            <a href="/register" class="m-2 p-2 rounded-md transition duration-200 hover:bg-slate-100">
+                <span class="font-bold">
+                    Регистрация
+                </span>
+            </a>
+        @endauth
+    </div>
+
     @yield('content')
 
 </body>

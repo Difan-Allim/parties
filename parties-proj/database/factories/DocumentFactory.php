@@ -20,8 +20,8 @@ class DocumentFactory extends Factory
             'title' => fake() -> word,
             'since_date' => fake() -> dateTimeBetween('-5 years', '+10 years'),
             'purpose_id' => fake() -> numberBetween(1, 100),
-            'organisation_id' => fake() -> numberBetween(1, 1000),
-            'user_id' => fake() -> numberBetween(1, 10)
+            'organisation_id' => fake() -> numberBetween(1, 500),
+            'user_id' => 1
         ];
     }
 }

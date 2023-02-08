@@ -25,7 +25,7 @@ class DocumentController extends Controller
 
     public function create()
     {
-
+        $this->authorize('operate', Document::class);
         return view('entities.document.create', [
             'purposes' => Purpose::all(),
             'organisations' => Organisation::all()
@@ -34,7 +34,7 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', Document::class);
 
         $validated = $request->validate([
             'title' => 'required',
@@ -46,12 +46,12 @@ class DocumentController extends Controller
 
         Document::create($validated);
 
-        return redirect('/documents')->with('message', 'Магазин успешно добавлен');
+        return redirect('/documents')->with('message', 'Документ успешно добавлен');
     }
 
     public function edit(Document $document)
     {
-        
+        $this->authorize('operate', Document::class);
 
         return view('entities.document.edit', [
             'document' => $document,
@@ -62,7 +62,7 @@ class DocumentController extends Controller
 
     public function update(Request $request, Document $document)
     {
-        
+        $this->authorize('operate', Document::class);
         
         $validated = $request->validate([
             'title' => 'required',
@@ -74,15 +74,15 @@ class DocumentController extends Controller
 
         $document->update($validated);
 
-        return redirect('/documents')->with('message', 'Магазин успешно изменён');
+        return redirect('/documents')->with('message', 'Документ успешно изменён');
     }
 
     public function destroy(Document $document)
     {
-        
+        $this->authorize('operate', Document::class);
 
         $document->delete();
 
-        return redirect('/documents')->with('message', 'Магазин успешно удалён');
+        return redirect('/documents')->with('message', 'Документ успешно удалён');
     }
 }

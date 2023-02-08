@@ -1,4 +1,5 @@
 @extends('header')
+
 @section('content')
     <p>{{$member->id}}</p>
     <p>{{$member->surname}}</p>

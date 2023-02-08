@@ -23,13 +23,14 @@ class CityController extends Controller
 
     public function create()
     {
+        $this->authorize('operate', City::class);
 
         return view('entities.city.create');
     }
     
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', City::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -37,19 +38,19 @@ class CityController extends Controller
 
         City::create($validated);
 
-        return redirect('/cities')->with('message', 'Тип собственности успешно добавлен');
+        return redirect('/cities')->with('message', 'Город успешно добавлен');
     }
 
     public function edit(City $city)
     {
-        
+        $this->authorize('operate', City::class);
 
         return view('entities.city.edit', ['city' => $city]);
     }
 
     public function update(Request $request, City $city)
     {
-        
+        $this->authorize('operate', City::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -57,15 +58,15 @@ class CityController extends Controller
 
         $city->update($validated);
 
-        return redirect('/cities')->with('message', 'Тип собственности успешно изменён');
+        return redirect('/cities')->with('message', 'Город успешно изменён');
     }
 
     public function destroy(City $city)
     {
-
+        $this->authorize('operate', City::class);
 
         $city->delete();
 
-        return redirect('/cities')->with('message', 'Тип собственности успешно удалён');
+        return redirect('/cities')->with('message', 'Город успешно удалён');
     }
 }

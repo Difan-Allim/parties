@@ -23,13 +23,13 @@ class TypeController extends Controller
 
     public function create()
     {
-
+        $this->authorize('operate', Type::class);
         return view('entities.type.create');
     }
 
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', Type::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -37,19 +37,19 @@ class TypeController extends Controller
 
         Type::create($validated);
 
-        return redirect('/types')->with('message', 'Тип собственности успешно добавлен');
+        return redirect('/types')->with('message', 'Тип акции успешно добавлен');
     }
 
     public function edit(Type $type)
     {
-        
+        $this->authorize('operate', Type::class);
 
         return view('entities.type.edit', ['type' => $type]);
     }
 
     public function update(Request $request, Type $type)
     {
-        
+        $this->authorize('operate', Type::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -57,15 +57,15 @@ class TypeController extends Controller
 
         $type->update($validated);
 
-        return redirect('/types')->with('message', 'Тип собственности успешно изменён');
+        return redirect('/types')->with('message', 'Тип акции успешно изменён');
     }
 
     public function destroy(Type $type)
     {
-
+        $this->authorize('operate', Type::class);
 
         $type->delete();
 
-        return redirect('/types')->with('message', 'Тип собственности успешно удалён');
+        return redirect('/types')->with('message', 'Тип акции успешно удалён');
     }
 }

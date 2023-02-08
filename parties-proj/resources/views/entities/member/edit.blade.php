@@ -1,73 +1,80 @@
 @extends('header')
 
 @section('content')
-    <form action="/discounts/{{$discount->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
+    <form action="/members/{{$member->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
         @method('PUT')
-        <input type="text" name="user_id" value="2" class="hidden">
 
-        <h1 class="text-2xl font-bold text-center">Изменить акцию</h1>
+        <h1 class="text-2xl font-bold text-center">Изменить представителя</h1>
 
-        {{-- title --}}
-        <x-input-box colname="название" colname_form="title" input_value="{{ $discount->title }}" />
-        @error('title')
+        {{-- surname --}}
+        <x-input-box colname="фамилия" colname_form="surname" input_value="{{ $member->surname }}" />
+        @error('surname')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- company_id type_id --}}
-        <x-input-box-search colname="Тип акции" colname_form="type_id" input_value="{{ $discount->type->id }}">
-            @foreach ($types as $type)
+        {{-- name --}}
+        <x-input-box colname="имя" colname_form="name" input_value="{{ $member->name }}" />
+        @error('name')
+            <p class="text-red-500">
+                {{ $message }}
+            </p>
+        @enderror
+
+        {{-- patronym --}}
+        <x-input-box colname="отчество" colname_form="patronym" input_value="{{ $member->patronym }}" />
+        @error('patronym')
+            <p class="text-red-500">
+                {{ $message }}
+            </p>
+        @enderror
+        
+        {{-- birth_date --}}
+        <x-input-box colname="дата рождения" colname_form="birth_date" input_value="{{ $member->birth_date }}" type="date"/>
+        @error('birth_date')
+            <p class="text-red-500">
+                {{ $message }}
+            </p>
+        @enderror
+
+        {{-- social_id --}}
+        <x-input-box-search colname="Социальное положение" colname_form="social_id" input_value="{{ $member->social->id }}">
+            @foreach ($socials as $social)
                 <li class="ledger-search-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
-                    value="{{ $type->id }}">{{ $type->title }}</li>
+                    value="{{ $social->id }}">{{ $social->title }}</li>
             @endforeach
         </x-input-box-search>
-        @error('type_id')
+        @error('social_id')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- grade_id organisation_id --}}
-        <x-input-box-search colname="Название организации" colname_form="organisation_id" input_value="{{ $discount->organisation->id }}">
-            @foreach ($organisations as $organisation)
-                <li class="ledger-search-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
-                    value="{{ $organisation->id }}">{{ $organisation->title }}</li>
+        {{-- department multiselect --}}
+        @php
+            $departmentsArr = [];
+            foreach ($member->departments as $department) {
+                array_push($departmentsArr, $department->id);
+            }
+
+            $departmentsStr = implode(',', $departmentsArr);
+        @endphp
+        <x-input-box-multiple colname="предприятия" colname_form="department_id" input_value="{{ $departmentsStr }}">
+            @foreach ($departments as $department)
+                <li class="ledger-multiple-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
+                    value="{{ $department->id }}" title="{{ $department->number }}">
+                    {{ $department->number }}</li>
             @endforeach
-        </x-input-box-search>
-        @error('organisation_id')
+        </x-input-box-multiple>
+        @error('department_id')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
 
-        {{-- ingredients event_date--}}
-        <x-input-box colname="дата проведения" colname_form="event_date" input_value="{{ $discount->event_date }}" type="date"/>
-        @error('event_date')
-            <p class="text-red-500">
-                {{ $message }}
-            </p>
-        @enderror
-
-        {{-- weight money --}}
-        <x-input-box colname="цена" colname_form="money" input_value="{{ $discount->money }}" type="decimal"/>
-        @error('money')
-            <p class="text-red-500">
-                {{ $message }}
-            </p>
-        @enderror
-
-        {{-- price count_m --}}
-        <x-input-box colname="численность" colname_form="count_m" input_value="{{ $discount->count_m }}" type="number"/>
-        @error('count_m')
-            <p class="text-red-500">
-                {{ $message }}
-            </p>
-        @enderror
-
-        <button type="submit" class="px-6 py-4 my-2 w-fit self-center rounded-md flex space-x-2 transition duration-200 bg-slate-100 hover:drop-shadow-md">
+        <button type="submit"
+            class="px-6 py-4 my-2 w-fit self-center rounded-md flex space-x-2 transition duration-200 bg-slate-100 hover:drop-shadow-md">
             Изменить
         </button>
-    </form>
-@endsection

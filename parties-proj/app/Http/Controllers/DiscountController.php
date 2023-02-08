@@ -26,7 +26,7 @@ class DiscountController extends Controller
 
     public function create()
     {
-
+        $this->authorize('operate', Discount::class);
         return view('entities.discount.create', [
             'organisations' => Organisation::all(),
             'types' => Type::all()
@@ -35,7 +35,7 @@ class DiscountController extends Controller
 
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', Discount::class);
 
         $validated = $request->validate([
             'title' => 'required',
@@ -51,12 +51,12 @@ class DiscountController extends Controller
 
         Discount::create($validated);
 
-        return redirect('/discounts')->with('message', 'Магазин успешно добавлен');
+        return redirect('/discounts')->with('message', 'Акция успешно добавлена');
     }
 
     public function edit(Discount $discount)
     {
-        
+        $this->authorize('operate', Discount::class);
 
         return view('entities.discount.edit', [
             'discount' => $discount,
@@ -67,7 +67,7 @@ class DiscountController extends Controller
 
     public function update(Request $request, Discount $discount)
     {
-        
+        $this->authorize('operate', Discount::class);
         
         $validated = $request->validate([
             'title' => 'required',
@@ -80,16 +80,16 @@ class DiscountController extends Controller
 
         $discount->update($validated);
 
-        return redirect('/discounts')->with('message', 'Магазин успешно изменён');
+        return redirect('/discounts')->with('message', 'Акция успешно измена');
     }
 
     public function destroy(Discount $discount)
     {
-        
+        $this->authorize('operate', Discount::class);
 
         $discount->delete();
 
-        return redirect('/discounts')->with('message', 'Магазин успешно удалён');
+        return redirect('/discounts')->with('message', 'Акция успешно удалена');
     }
 
 }

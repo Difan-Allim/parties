@@ -10,7 +10,7 @@ class Member extends Model
     use HasFactory;
 
     protected $fillable = ['surname','name','patronym','birth_date','social_id'];
-    
+
     public function departments()
     {
         return $this->belongsToMany(Department::class);

@@ -22,7 +22,7 @@ class DepartmentFactory extends Factory
             'phone_number' => fake()->e164PhoneNumber(),
             'address' => fake()->streetAddress(),
             'city_id' => fake()->numberBetween(1, 100),
-            'organisation_id' => fake()->numberBetween(1, 1000)
+            'organisation_id' => fake()->numberBetween(1, 500)
         ];
     }
 }

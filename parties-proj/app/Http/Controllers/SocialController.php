@@ -23,13 +23,13 @@ class SocialController extends Controller
 
     public function create()
     {
-
+        $this->authorize('operate', Social::class);
         return view('entities.social.create');
     }
 
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', Social::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -37,19 +37,19 @@ class SocialController extends Controller
 
         Social::create($validated);
 
-        return redirect('/socials')->with('message', 'Тип собственности успешно добавлен');
+        return redirect('/socials')->with('message', 'Социальная категория успешно добавлена');
     }
 
     public function edit(Social $social)
     {
-        
+        $this->authorize('operate', Social::class);
 
         return view('entities.Social.edit', ['social' => $social]);
     }
 
     public function update(Request $request, Social $social)
     {
-        
+        $this->authorize('operate', Social::class);
 
         $validated = $request->validate([
             'title' => 'required'
@@ -57,15 +57,15 @@ class SocialController extends Controller
 
         $social->update($validated);
 
-        return redirect('/socials')->with('message', 'Тип собственности успешно изменён');
+        return redirect('/socials')->with('message', 'Социальная категория успешно изменена');
     }
 
     public function destroy(Social $social)
     {
-
+        $this->authorize('operate', Social::class);
 
         $social->delete();
 
-        return redirect('/socials')->with('message', 'Тип собственности успешно удалён');
+        return redirect('/socials')->with('message', 'Социальная категория успешно удалена');
     }
 }

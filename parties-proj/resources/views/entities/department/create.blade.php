@@ -7,8 +7,8 @@
         <h1 class="text-2xl font-bold text-center">Добавить штаб</h1>
 
         {{-- number --}}
-        <x-input-box colname="название" colname_form="title" input_value="{{ old('title') }}" />
-        @error('title')
+        <x-input-box colname="номер" colname_form="number" input_value="{{ old('number') }}" />
+        @error('number')
             <p class="text-red-500">
                 {{ $message }}
             </p>
@@ -27,7 +27,7 @@
             </p>
         @enderror
 
-        {{-- organisation_id --}}
+        {{-- city_id --}}
         <x-input-box-search colname="Название организации" colname_form="organisation_id" input_value="{{ old('organisation_id') }}">
             @foreach ($organisations as $organisation)
                 <li class="ledger-search-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
@@ -49,19 +49,19 @@
         @enderror
 
         {{-- address --}}
-        <x-input-box colname="Адрес" colname_form="address" input_value="{{ old('address') }}"/>
+        <x-input-box colname="Адрес" colname_form="address" input_value="{{ old('address') }}" />
         @error('address')
             <p class="text-red-500">
                 {{ $message }}
             </p>
         @enderror
-        
-        {{-- members multiselect --}}
-        <x-input-box-multiple colname="участники" colname_form="member_id" input_value="{{ old('member_id') }}">
-            @foreach ($members as $member)
-                <li class="ledger-multiple-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
-                    value="{{ $member->id }}">{{ $member->surname }} {{ $member->name }} {{ $member->patronym }}</li>
-            @endforeach
+
+       {{-- member multiselect --}}
+       <x-input-box-multiple colname="владельцы" colname_form="member_id" input_value="{{ old('member_id') }}">
+        @foreach ($members as $member)
+            <li class="ledger-multiple-li cursor-pointer p-2 m-1 rounded-md transition duration-200 hover:bg-slate-300"
+                value="{{ $member->id }}">{{ $member->surname }} {{ $member->name }} {{ $member->patronym }}</li>
+        @endforeach
         </x-input-box-multiple>
         @error('member_id')
             <p class="text-red-500">

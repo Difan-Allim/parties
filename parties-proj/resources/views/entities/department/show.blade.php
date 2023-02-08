@@ -1,4 +1,5 @@
 @extends('header')
+
 @section('content')
     <p>{{$department->id}}</p>
     <p>{{$department->number}}</p>

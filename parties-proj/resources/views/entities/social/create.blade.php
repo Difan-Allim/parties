@@ -1,7 +1,7 @@
 @extends('header')
 
 @section('content')
-    <form action="/types" method="POST">
+    <form action="/socials" method="POST">
         @csrf
         <h1 class="text-2xl font-bold text-center">Социальное положение</h1>
         <x-input-box colname="название" colname_form="title" input_value="{{ old('title') }}" />

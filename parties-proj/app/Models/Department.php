@@ -10,7 +10,7 @@ class Department extends Model
     use HasFactory;
 
     protected $fillable = ['number','phone_number','address','city_id','organisation_id'];
-    
+
     public function members()
     {
         return $this->belongsToMany(Member::class);

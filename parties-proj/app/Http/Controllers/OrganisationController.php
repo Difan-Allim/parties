@@ -24,7 +24,7 @@ class OrganisationController extends Controller
 
     public function create()
     {
-
+        $this->authorize('operate', Organisation::class);
         return view('entities.organisation.create', [
             'legals' => Legal::all()
         ]);
@@ -32,7 +32,7 @@ class OrganisationController extends Controller
 
     public function store(Request $request)
     {
-        
+        $this->authorize('operate', Organisation::class);
 
         $validated = $request->validate([
             'title' => 'required',
@@ -42,12 +42,12 @@ class OrganisationController extends Controller
 
         Organisation::create($validated);
 
-        return redirect('/organisations')->with('message', 'Тип собственности успешно добавлен');
+        return redirect('/organisations')->with('message', 'Организация успешно добавлен');
     }
 
     public function edit(Organisation $organisation)
     {
-        
+        $this->authorize('operate', Organisation::class);
         return view('entities.organisation.edit', [
             'organisation' => $organisation,
             'legals' => Legal::all()
@@ -57,7 +57,7 @@ class OrganisationController extends Controller
 
     public function update(Request $request, Organisation $organisation)
     {
-        
+        $this->authorize('operate', Organisation::class);
 
         $validated = $request->validate([
             'title' => 'required',
@@ -67,15 +67,15 @@ class OrganisationController extends Controller
 
         $organisation->update($validated);
 
-        return redirect('/organisations')->with('message', 'Тип собственности успешно изменён');
+        return redirect('/organisations')->with('message', 'Организация успешно изменена');
     }
 
     public function destroy(Organisation $organisation)
     {
-
+        $this->authorize('operate', Organisation::class);
 
         $organisation->delete();
 
-        return redirect('/organisations')->with('message', 'Тип собственности успешно удалён');
+        return redirect('/organisations')->with('message', 'Организация успешно удалена');
     }
 }
