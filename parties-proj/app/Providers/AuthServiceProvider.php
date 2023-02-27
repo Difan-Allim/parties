@@ -34,10 +34,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('operate-social', [SocialPolicy::class, 'operate']);
         Gate::define('operate-type', [TypePolicy::class, 'operate']);
 
-        Gate::define('creare-discount', [DiscountPolicy::class, 'create']);
+        Gate::define('create-discount', [DiscountPolicy::class, 'create']);
         Gate::define('update-discount', [DiscountPolicy::class, 'update']);
         Gate::define('delete-discount', [DiscountPolicy::class, 'delete']);
-        Gate::define('creare-document', [DocumentPolicy::class, 'create']);
+        Gate::define('create-document', [DocumentPolicy::class, 'create']);
         Gate::define('update-document', [DocumentPolicy::class, 'update']);
         Gate::define('delete-document', [DocumentPolicy::class, 'delete']);
     }

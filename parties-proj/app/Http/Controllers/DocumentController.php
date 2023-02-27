@@ -25,7 +25,7 @@ class DocumentController extends Controller
 
     public function create()
     {
-        $this->authorize('operate', Document::class);
+        $this->authorize('create', Document::class);
         return view('entities.document.create', [
             'purposes' => Purpose::all(),
             'organisations' => Organisation::all()
@@ -34,7 +34,7 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('operate', Document::class);
+        $this->authorize('create', Document::class);
 
         $validated = $request->validate([
             'title' => 'required',
@@ -51,7 +51,7 @@ class DocumentController extends Controller
 
     public function edit(Document $document)
     {
-        $this->authorize('operate', Document::class);
+        $this->authorize('edit', Document::class);
 
         return view('entities.document.edit', [
             'document' => $document,
@@ -62,7 +62,7 @@ class DocumentController extends Controller
 
     public function update(Request $request, Document $document)
     {
-        $this->authorize('operate', Document::class);
+        $this->authorize('edit', Document::class);
         
         $validated = $request->validate([
             'title' => 'required',
@@ -79,7 +79,7 @@ class DocumentController extends Controller
 
     public function destroy(Document $document)
     {
-        $this->authorize('operate', Document::class);
+        $this->authorize('delete', Document::class);
 
         $document->delete();
 

@@ -1,7 +1,8 @@
 @extends('header')
 
 @section('content')
-    <form action="/types" method="POST">
+<div class="flex justify-center ">
+    <form action="/types" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
         <h1 class="text-2xl font-bold text-center">Типы акций</h1>
         <x-input-box colname="название" colname_form="title" input_value="{{ old('title') }}" />
@@ -15,5 +16,5 @@
             Добавить
         </button>
     </form>
-
+</div>
 @endsection

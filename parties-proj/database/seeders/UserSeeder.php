@@ -35,6 +35,18 @@ class UserSeeder extends Seeder
             'email' => 'editor@parties.com',
             'password' => bcrypt('j2gekPB$2eG5') // TODO not secure
         ]);
+        \App\Models\User::factory()->create([
+            'role' => User::IS_EDITOR,
+            'name' => 'dummy1_editor',
+            'email' => 'editor1@parties.com',
+            'password' => bcrypt('qwe123') // TODO not secure
+        ]);
+        \App\Models\User::factory()->create([
+            'role' => User::IS_EDITOR,
+            'name' => 'dummy2_editor',
+            'email' => 'editor2@parties.com',
+            'password' => bcrypt('123qwe') // TODO not secure
+        ]);
 
         \App\Models\User::factory()->create([
             'role' => User::IS_ADMIN,

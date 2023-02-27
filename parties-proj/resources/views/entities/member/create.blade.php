@@ -1,6 +1,7 @@
 @extends('header')
 
 @section('content')
+<div class="flex justify-center">
     <form action="/members" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
 
@@ -68,4 +69,5 @@
             Добавить
         </button>
     </form>
+</div>
 @endsection

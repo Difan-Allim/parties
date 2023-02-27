@@ -1,7 +1,8 @@
 @extends('header')
 
 @section('content')
-    <form action="/purposes/{{$purpose->id}}" method="POST">
+<div class="flex justify-center ">
+    <form action="/purposes/{{$purpose->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
         @method('PUT')
         <h1 class="text-2xl font-bold text-center">Изменить название</h1>
@@ -16,5 +17,5 @@
             Изменить
         </button>
     </form>
-
+</div>
 @endsection

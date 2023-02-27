@@ -1,12 +1,33 @@
 @extends('header')
 
 @section('content')
-    <p>{{$department->id}}</p>
-    <p>{{$department->number}}</p>
-    <p>{{$department->phone_number}}</p>
-    <p>{{$department->address}}</p>
-    <p>{{$department->city->title}}</p>
-    <p>{{$department->organisation->title}}</p>
-
+<div class="flex flex-col justify-center m-8 space-y-8">
+    <div>
+        <span class="font-bold">id:</span>
+        <span>{{$department->id}}</span>
+    </div>
+    <div>
+        <span class="font-bold">номер:</span>
+        <span> {{$department->number}}</span>
+    </div>
+    <div>
+        <span class="font-bold">телефон:</span>
+        <span> {{$department->phone_number}}</span>
+    </div>
+    <div>
+        <span class="font-bold">адрес:</span>
+        <span> {{$department->address}}</span>
+    </div>
+    <div>
+        <span class="font-bold">город:</span>
+        <span> {{$department->city->title}}</span>
+    </div>
+    <div>
+        <span class="font-bold">организация:</span>
+        <span> {{$department->organisation->title}}</span>
+    </div>
+    
     <x-edit-delete-entry href="/departments/{{$department->id}}" />
+</div>
+
 @endsection

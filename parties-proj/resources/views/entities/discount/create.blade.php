@@ -1,6 +1,7 @@
 @extends('header')
 
 @section('content')
+<div class="flex justify-center">
     <form action="/discounts" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
         <input type="text" name="user_id" value="{{ auth()->user()->id }}" class="hidden">
@@ -69,4 +70,5 @@
             Добавить
         </button>
     </form>
+</div>
 @endsection

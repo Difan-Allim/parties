@@ -19,4 +19,8 @@ class Member extends Model
     {
         return $this->belongsTo(Social::class);
     }
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
+    }
 }

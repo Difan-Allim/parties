@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Discount;
+use App\Models\Member;
 use App\Models\Organisation;
 use App\Models\Type;
 use App\Models\User;
@@ -26,16 +27,17 @@ class DiscountController extends Controller
 
     public function create()
     {
-        $this->authorize('operate', Discount::class);
+        $this->authorize('create', Discount::class);
         return view('entities.discount.create', [
             'organisations' => Organisation::all(),
-            'types' => Type::all()
+            'types' => Type::all(),
+            'members' => Member::all()
         ]);
     }
 
     public function store(Request $request)
     {
-        $this->authorize('operate', Discount::class);
+        $this->authorize('create', Discount::class);
 
         $validated = $request->validate([
             'title' => 'required',
@@ -43,31 +45,33 @@ class DiscountController extends Controller
             'money' => 'required',
             'count_m' => 'required',
             'type_id' => 'required',
-            'organisation_id' => 'required|numeric',
+            'member_id' => 'required',
             'user_id' => '',
         ]);
 
-        // dd($validated);
+        $discount = Discount::create($validated);
 
-        Discount::create($validated);
+        $organisations = explode(',', $request['organisation_id']);
+        $discount->organisations()->attach($organisations);
 
         return redirect('/discounts')->with('message', 'Акция успешно добавлена');
     }
 
     public function edit(Discount $discount)
     {
-        $this->authorize('operate', Discount::class);
+        $this->authorize('edit', Discount::class);
 
         return view('entities.discount.edit', [
             'discount' => $discount,
             'organisations' => Organisation::all(),
-            'types' => Type::all()
+            'types' => Type::all(),
+            'members' => Member::all()
         ]);
     }
 
     public function update(Request $request, Discount $discount)
     {
-        $this->authorize('operate', Discount::class);
+        $this->authorize('edit', Discount::class);
         
         $validated = $request->validate([
             'title' => 'required',
@@ -75,17 +79,21 @@ class DiscountController extends Controller
             'money' => 'required',
             'count_m' => 'required',
             'type_id' => 'required',
-            'organisation_id' => 'required|numeric',
+            'member_id' => 'required',
         ]);
 
         $discount->update($validated);
+
+        $organisations = explode(',', $request['organisation_id']);
+        $discount->organisations()->detach();
+        $discount->organisations()->attach($organisations);
 
         return redirect('/discounts')->with('message', 'Акция успешно измена');
     }
 
     public function destroy(Discount $discount)
     {
-        $this->authorize('operate', Discount::class);
+        $this->authorize('delete', Discount::class);
 
         $discount->delete();
 

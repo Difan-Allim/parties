@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PurposPolicy
+class PurposePolicy
 {
     use HandlesAuthorization;
 

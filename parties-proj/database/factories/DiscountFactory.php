@@ -19,10 +19,10 @@ class DiscountFactory extends Factory
         return [
             'title' => fake() -> word,
             'event_date' => fake() -> dateTimeBetween('-5 years', '+10 years'),
-            'money' => fake() -> randomFloat(2, 10, 100),
+            'money' => fake() -> randomFloat(2, 100000, 1000000),
             'count_m' => fake() -> randomNumber(5, true),
             'type_id' => fake() -> numberBetween(1, 100),
-            'organisation_id' => fake() -> numberBetween(1, 500),
+            'member_id' => fake() -> numberBetween(1, 8000),
             'user_id' => 1,
         ];
     }

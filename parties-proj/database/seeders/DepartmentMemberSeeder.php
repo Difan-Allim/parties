@@ -14,6 +14,9 @@ class DepartmentMemberSeeder extends Seeder
      */
     public function run()
     {
-       //
+        \App\Models\Department::factory(2000)->create();
+        \App\Models\Member::factory(35534)->create();
+        \App\Models\DepartmentMember::factory(35534)->create();
+        
     }
 }

@@ -1,7 +1,8 @@
 @extends('header')
 
 @section('content')
-    <form action="/members/{{$member->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
+<div class="flex justify-center ">
+    <form action="/members/{{$member->id}}" method="POST" class="w-2/3 flex flex-col space-y-6" >
         @csrf
         @method('PUT')
 
@@ -78,3 +79,6 @@
             class="px-6 py-4 my-2 w-fit self-center rounded-md flex space-x-2 transition duration-200 bg-slate-100 hover:drop-shadow-md">
             Изменить
         </button>
+    </form>
+</div>
+@endsection

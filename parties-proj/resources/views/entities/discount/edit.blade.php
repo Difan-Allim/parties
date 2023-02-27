@@ -1,6 +1,7 @@
 @extends('header')
 
 @section('content')
+<div class="flex justify-center ">
     <form action="/discounts/{{$discount->id}}" method="POST" class="w-2/3 flex flex-col space-y-6">
         @csrf
         @method('PUT')
@@ -70,4 +71,5 @@
             Изменить
         </button>
     </form>
+</div>
 @endsection

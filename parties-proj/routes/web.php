@@ -11,6 +11,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OrganisationController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\QueryController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,53 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
+Route::controller(QueryController::class)->group(function () {
+    Route::get('/queries', 'index');
+    Route::get('/queries/inner_join_1', 'inner_join_1');
+    Route::post('/queries/inner_join_1', 'inner_join_1_post');
+
+    Route::get('/queries/inner_join_2', 'inner_join_2');
+    Route::post('/queries/inner_join_2', 'inner_join_2_post');
+
+    Route::get('/queries/inner_join_3', 'inner_join_3');
+    Route::post('/queries/inner_join_3', 'inner_join_3_post');
+
+
+    Route::get('/queries/inner_join_4', 'inner_join_4');
+    Route::post('/queries/inner_join_4', 'inner_join_4_post');
+
+    Route::get('/queries/inner_join_5', 'inner_join_5');
+
+    Route::get('/queries/inner_join_6', 'inner_join_6');
+
+    Route::get('/queries/inner_join_7', 'inner_join_7');
+
+    Route::get('/queries/left_join', 'left_join');
+
+    Route::get('/queries/right_join', 'right_join');
+
+    Route::get('/queries/select_in_select', 'select_in_select');
+
+    Route::get('/queries/aggregate_no_condition', 'aggregate_no_condition');
+
+    Route::get('/queries/aggregate_condition_data', 'aggregate_condition_data');
+    Route::post('/queries/aggregate_condition_data', 'aggregate_condition_data_post');
+
+    Route::get('/queries/aggregate_condition_group', 'aggregate_condition_group');
+
+    Route::get('/queries/aggregate_condition_both', 'aggregate_condition_both');
+    Route::post('/queries/aggregate_condition_both', 'aggregate_condition_both_post');
+
+    Route::get('/queries/aggregate_mishmash', 'aggregate_mishmash');
+    Route::post('/queries/aggregate_mishmash', 'aggregate_mishmash_post');
+
+    Route::get('/queries/aggregate_subquery', 'aggregate_subquery');
+    Route::post('/queries/aggregate_subquery', 'aggregate_subquery_post');
+
+
+
+});
 
 Route::controller(CityController::class)->group(function () {
     Route::get('/cities/create', 'create')->middleware('auth');

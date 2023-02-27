@@ -17,8 +17,8 @@ class DepartmentMemberFactory extends Factory
     public function definition()
     {
         return [
-            'department_id' => fake()->numberBetween(1, 5000),
-            'member_id' => fake()->numberBetween(1, 10000),
+            'department_id' => fake()->numberBetween(1, 2000),
+            'member_id' => fake()->numberBetween(1, 8000),
             'join_date' => fake()->dateTimeBetween('-19 years', '-10 years'),
         ];
     }

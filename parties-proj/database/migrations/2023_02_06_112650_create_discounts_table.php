@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('money');
             $table->integer('count_m');
             $table->foreignId('type_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('organisation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('member_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
